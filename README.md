@@ -8,7 +8,10 @@ A process and tools to enable large scale voting on ethereum. Uses the following
 ## Setup
 - Ballot is converted to javascript object of questions/answers 
 ``` 
-ballot = [{ title: 'Mayor', answers: ['Alice','Bob','Charlie','None']}, {title: 'Amendment 21', answers: ['Yes','No','None']}]
+ballot = [
+  { title: 'Mayor', answers: ['Alice','Bob','Charlie','None']},
+  {title: 'Amendment 21', answers: ['Yes','No','None']}
+  ]
 ```
 - An array is created of all possible combinations
 ```
