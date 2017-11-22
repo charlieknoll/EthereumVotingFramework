@@ -60,7 +60,7 @@ ballotChoices = [
   var submission[n] = {sha3(choice): n, encryptedValue: sha3(ballotCoice[n]+ethereumAccount+sha3(adminSecret)}
   e.g. submission[6] = {choice: 0AEFGHSLT...', encryptedValue: sha3('088877..'+'0x83200...'+sha3(adminSecret)} -- 0x83200 votes Bob,No
 ```
-- Server creates etherum tx's from user's account for each encrypted ballot choice all with nonce = 0 (this prevents multiple choices from being used in the voting process for a given account)
+- Server creates etherum tx's from user's account for each encrypted ballot choice all with nonce = 0 (this prevents multiple choices from being used in the voting process for a given account), it then creates a wrapping "forwarding" transaction to use gas from the forwarding contract
 ```
   tx[n] =  signTx(from: userAccount, to: votingContract, function: vote, valueData: submission[n].encryptedValue,nonce=0)
   userBallot = {account: accountAddr, tx: tx}
