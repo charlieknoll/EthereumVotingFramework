@@ -65,6 +65,7 @@ ballotChoices = [
   tx[n] =  signTx(from: userAccount, to: votingContract, function: vote, valueData: submission[n].encryptedValue,nonce=0)
   userBallot = {account: accountAddr, tx: tx}
 ```
+#### TODO Try to figure out a way to disconnect the identity from the tx casting the vote
 
 ## Voter Registration
 This is would use conventional methods to setup voters with user/passwords on the voting website.  In addition some form of attestation could be added to verify identification and uniqueness of a voter.
