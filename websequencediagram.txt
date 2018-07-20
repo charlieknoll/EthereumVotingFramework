@@ -1,0 +1,34 @@
+Paste the content below at https://www.websequencediagrams.com/
+
+title Ethereum Voting Process
+participant Election Agency \n (Offline Secure) as BallotGenerator 
+participant Election Agency \n (WebFarm) as ElectionAgency
+participant Ballot Controller \n (WebFarm) as BallotController
+participant Voter \n (Secure Mobile App) as Voter 
+participant BlockChain \n (Ethereum) as BlockChain
+BallotGenerator ->BallotGenerator: Generate Ballots
+BallotGenerator ->ElectionAgency: Ballots
+BallotGenerator ->BallotController: BallotType-Token List
+opt Voting Open
+Voter->ElectionAgency: Authenticate & \n Request Vote Token
+note left of ElectionAgency: Voter/Vote Token assigned
+ElectionAgency->Voter:Vote Token
+Voter->BallotController:Requst Ballot \n (Vote Token, Ephemeral PubKey)
+ElectionAgency->BallotController: EncryptedBallot(BallotType,\nEphemeral PubKey)
+BallotController->BlockChain:Register Ballot
+BallotController->Voter:ReEncrypted Ballot
+alt Exception use case 
+Voter->ElectionAgency:Lost Ballot
+ElectionAgency->BallotController:Revoke Ballot (Vote Token)
+BallotController->BlockChain:Revoke Ballot
+end
+Voter->Voter:Decrypt Ballot
+Voter->BlockChain:Hashed Vote
+Voter<->BlockChain:Verify Vote
+BlockChain->BallotGenerator :Tally votes secretly using vote hashes
+end
+ElectionAgency->Public: Reveal Election Results
+ElectionAgency->BlockChain:Reveal Secret
+BlockChain<->Public:Verify Election by decoding \n vote hashes using secret
+ElectionAgency->BallotController:Verify Ballot Status (Vote Token)
+BallotController->BlockChain: Verify Ballot Status (account)
