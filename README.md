@@ -146,3 +146,7 @@ tally() static readonly {
 At this point cross ballot reporting should be trivial and easily verifiable.
 
 //TODO add master questionid to ballot struct
+
+# Attack Prevention
+
+This scheme will not allow the attack as described here: https://blog.enigma.co/dark-daos-and-the-complexity-of-secret-voting-fc3b4fe4d666 due to the private keys never being revealed to the voter.
